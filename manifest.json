@@ -1,0 +1,13 @@
+
+
+{
+    "name": "ChatGPT-Composer",
+    "version": "1.0",
+    "description": "combine document and paste prompt in chatGPT with easy step",
+    "manifest_version": 3,
+    "icons": "pending",
+    "action": {
+      "default_popup": "index.html"
+    },
+    "permissions": ["tabs"]
+  }
