@@ -39,15 +39,15 @@
 
 
 
-div {
+/* div {
   text-align: center;
 padding: 20px;
 border: 3px blue dashed;
 width: 60%;
 margin: auto;
-}
+} */
 
-.btn {
+/* .btn {
 border: none;
 text-align: center;
 background-color: rgb(218, 216, 216);
@@ -60,4 +60,4 @@ transition-duration: 0.6s;
 .btn:hover {
 background-color: blue;
 color: aliceblue;
-}
+} */

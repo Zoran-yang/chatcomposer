@@ -1,4 +1,4 @@
-import "./Tab.css"
+// import "./Tab.css"
 
 
 function Tab({chooseTab}){
