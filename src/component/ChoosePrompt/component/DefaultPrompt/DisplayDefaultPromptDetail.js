@@ -20,7 +20,6 @@ function DisplayDefaultPromptDetail({choosedPromptType}){
                         id="panel1a-header"
                         >
                             <Typography sx={{display: "flex",alignItems:"center"}}>{type[0]}</Typography>
-
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>

@@ -11,6 +11,7 @@ function ChoosePrompt(){
     const [tabName, setTabName] = useState("DefaultPrompt")
     const chooseTab = (tab) => {
         setTabName(tab)
+        console.log("AC")
     }
 
     switch (tabName){
