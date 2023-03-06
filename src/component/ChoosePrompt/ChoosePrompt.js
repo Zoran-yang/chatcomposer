@@ -1,45 +1,48 @@
 import {YourFavorite} from "./component/YourFavorite"
 import {YourHistory} from "./component/YourHistory"
 import {DefaultPrompt} from "./component/DefaultPrompt/DefaultPrompt"
-import { Tab } from "./component/Tab"
+import { UserInterface } from "./component/Tab"
+// import  ZZZ  from "./component/Tab"
 import { useState } from "react"
 
 
 
 
 function ChoosePrompt(){
-    const [tabName, setTabName] = useState("DefaultPrompt")
-    const chooseTab = (tab) => {
-        setTabName(tab)
-        console.log("AC")
-    }
 
-    switch (tabName){
-        case "DefaultPrompt" :
-            return(
-                <>
-                    <h1>Choose prompt</h1>
-                    <Tab chooseTab = {chooseTab} />
-                    <DefaultPrompt/>
-                </>
-            )
-        case "YourHistory" :
-            return(
-                <>
-                    <h1>Choose prompt</h1>
-                    <Tab chooseTab = {chooseTab} />
-                    <YourHistory/>
-                </>
-            )
-        default :
-            return(
-                <>
-                    <h1>Choose prompt</h1>
-                    <Tab chooseTab = {chooseTab} />
-                    <YourFavorite/>
-                </>
-            )
-    }
+    return(
+        <>
+            <h1>Choose prompt</h1>
+            <UserInterface/>
+        </>
+
+    )
+    // switch (tabName){
+    //     case "DefaultPrompt" :
+    //         return(
+    //             <>
+    //                 
+                    
+    //                 <DefaultPrompt/>
+    //             </>
+    //         )
+    //     case "YourHistory" :
+    //         return(
+    //             <>
+    //                 <h1>Choose prompt</h1>
+    //                 <Tab  />
+    //                 <YourHistory/>
+    //             </>
+    //         )
+    //     default :
+    //         return(
+    //             <>
+    //                 <h1>Choose prompt</h1>
+    //                 <Tab />
+    //                 <YourFavorite/>
+    //             </>
+    //         )
+    // }
 }
 
 

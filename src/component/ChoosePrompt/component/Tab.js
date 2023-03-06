@@ -1,6 +1,37 @@
 // import "./Tab.css"
 
-import { Box, Tabs } from "@mui/material";
+import { Box, Tabs, Typography } from "@mui/material";
+import PropTypes from 'prop-types';
+import { useState } from "react";
+import Tab from '@mui/material/Tab';
+import { DisplayDefaultPrompt } from "./DefaultPrompt/DisplayDefaultPrompt";
+
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            <Box>{children}</Box>
+          </Box>
+        )}
+      </div>
+    );
+  }
+  
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+  };
+  
+
 
 function a11yProps(index) {
     return {
@@ -10,22 +41,35 @@ function a11yProps(index) {
 }
 
 
-function Tab({chooseTab}){
+function UserInterface(){
+    const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  console.log(<Tab label="DefaultPrompt" {...a11yProps(0)} />)
 
     return(
-        <>
-            {/* <span onClick={() => chooseTab("DefaultPrompt")} className="tab">Default Prompt</span>
-            <span onClick={() => chooseTab("YourFavorite")} className="tab">Your Favorite</span>
-            <span onClick={() => chooseTab("YourHistory")} className="tab">Your History</span> */}
+        
+        <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs aria-label="basic tabs example">
-                    <Tab label="DefaultPrompt" {...a11yProps(0)} onClick={() => chooseTab("DefaultPrompt")}/>
-                    <Tab label="YourFavorite" {...a11yProps(1)} onClick={() => chooseTab("YourFavorite")}/>
-                    <Tab label="YourHistory" {...a11yProps(2)} onClick={() => chooseTab("YourHistory")}/>
+                <Tabs value={value} aria-label="basic tabs example" onChange={handleChange}>
+                    <Tab label="DefaultPrompt" {...a11yProps(0)} />
+                    <Tab label="YourFavorite" {...a11yProps(1)} />
+                    <Tab label="YourHistory" {...a11yProps(2)} />
                 </Tabs>
             </Box>
-        </>
+                <TabPanel value={value} index={0}>
+                    <DisplayDefaultPrompt></DisplayDefaultPrompt>
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    Item Two
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                    Item Three
+                </TabPanel>
+        </Box>
     )
 }
 
-export {Tab}
+export {UserInterface}
