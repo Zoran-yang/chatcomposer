@@ -1,6 +1,6 @@
 // import "./Tab.css"
 
-import { Box, Tabs, Typography } from "@mui/material";
+import { Box, Tabs} from "@mui/material";
 import PropTypes from 'prop-types';
 import { useState } from "react";
 import Tab from '@mui/material/Tab';
@@ -41,16 +41,14 @@ function a11yProps(index) {
 }
 
 
-function UserInterface(){
-    const [value, setValue] = useState(0);
+function UserInterface({setComposerPhaseFunc, setCopiedPromptFunc}){
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log(<Tab label="DefaultPrompt" {...a11yProps(0)} />)
 
     return(
-        
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} aria-label="basic tabs example" onChange={handleChange}>
@@ -60,7 +58,7 @@ function UserInterface(){
                 </Tabs>
             </Box>
                 <TabPanel value={value} index={0}>
-                    <DisplayDefaultPrompt></DisplayDefaultPrompt>
+                    <DisplayDefaultPrompt setComposerPhaseFunc={setComposerPhaseFunc} setCopiedPromptFunc={setCopiedPromptFunc}></DisplayDefaultPrompt>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     Item Two

@@ -40,66 +40,67 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
     return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
     };
 }
 
 
-function DisplayDefaultPrompt(){
+ 
+function DisplayDefaultPrompt({setComposerPhaseFunc,setCopiedPromptFunc}){
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
-      
-      console.log(newValue)
       setValue(newValue);
     };
 
+    function copyPromptToNextPhase(CopiedPrompt){
+        setCopiedPromptFunc(CopiedPrompt)
+        setComposerPhaseFunc("PreviewAndAdjustPrompt")
+    }
     
     function DisplayPromptDetail(){
         return Object.values(PromptInfo).reduce((arr,curr,index) =>{
-
-            let x = Object.entries(curr).map((type) => {
-                return(
-                <Accordion key={type[0]}>
-                    <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                    key={type[0]}
-                    >
-                        <Typography sx={{display: "flex",alignItems:"center"}}>{type[0]}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails >
-                        <Typography>
-                            {type[1]}
-                        </Typography>
-                        <Button variant="outlined" size="small">
-                                COPY
-                            </Button>
-                    </AccordionDetails>
-                </Accordion>
-                )
-                
-            })
-            
             arr.push(
-                <TabPanel key={value} value={value} index={index}>
-                {x}
+                <TabPanel key={index} value={value} index={index}>
+                    {Object.entries(curr).map((type) => {
+                        return(
+                            <Accordion key={type[0]}>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header"
+                                    key={type[0]}
+                                >
+                                    <Typography sx={{display: "flex",alignItems:"center"}}>{type[0]}</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails >
+                                    <Typography>
+                                        {type[1]}
+                                    </Typography>
+                                    <Button variant="outlined" size="small" onClick={() => copyPromptToNextPhase(type[1])}>
+                                            Choose
+                                    </Button>
+                                </AccordionDetails>
+                            </Accordion>
+                        )
+                    })}
                 </TabPanel>
             )
             return arr      
         },[])
     }
 
+
+
     return (
         <Box sx={{ width: '100%' }}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                {Object.keys(PromptInfo).map((type, index) =>{return <Tab label={type} key={type} {...a11yProps(index)} />})}
-            </Tabs>
-          </Box>
-            <DisplayPromptDetail></DisplayPromptDetail>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                    {Object.keys(PromptInfo).map((type, index) =>{return <Tab label={type} key={type} {...a11yProps(index)} />})}
+                </Tabs>
+            </Box>
+            <DisplayPromptDetail></DisplayPromptDetail>      
         </Box>
       );
 }
