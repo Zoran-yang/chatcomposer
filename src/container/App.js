@@ -17,7 +17,7 @@ function App() {
 
   switch (composerPhase) {
     case "PreviewAndAdjustPrompt":
-      return <PreviewAndAdjustPrompt copiedPrompt={copiedPrompt}/>
+      return <PreviewAndAdjustPrompt copiedPrompt={copiedPrompt} setComposerPhaseFunc={setComposerPhaseFunc}/>
     default:
       return <ChoosePrompt setComposerPhaseFunc={setComposerPhaseFunc} setCopiedPromptFunc={setCopiedPromptFunc}/>
   };

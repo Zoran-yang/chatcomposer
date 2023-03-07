@@ -1,12 +1,11 @@
 import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
 
 
 
 
-function PreviewAndAdjustPrompt({copiedPrompt}){
+function PreviewAndAdjustPrompt({copiedPrompt, setComposerPhaseFunc}){
 
     return (
         <>
@@ -35,7 +34,7 @@ function PreviewAndAdjustPrompt({copiedPrompt}){
                             <Button variant="outlined" size="small">
                                 Sumbit
                             </Button>
-                            <Button variant="outlined" size="small">
+                            <Button variant="outlined" size="small" onClick={()=>setComposerPhaseFunc("ChoosePrompt")}>
                                 Cancel
                             </Button>  
                     </div>
