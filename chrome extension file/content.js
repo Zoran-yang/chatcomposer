@@ -1,5 +1,5 @@
 
-async function addPastePromptButton() {
+async function pastePromptInTextarea(prompt) {
   const conversationField = document.querySelector('textarea')
   const Buttons = document.querySelectorAll('button')
   const submitButton = Buttons[Buttons.length-1]
@@ -8,7 +8,7 @@ async function addPastePromptButton() {
   }
 
   const pastePrompt = async () => {
-    const prompt = await navigator.clipboard.readText()
+    // const prompt = await navigator.clipboard.readText()
     conversationField.value = prompt
     conversationField.dispatchEvent(new InputEvent('input', { bubbles: true }))
     submitButton.click()
@@ -16,4 +16,4 @@ async function addPastePromptButton() {
   await pastePrompt()
 }
 
-setTimeout(()=>addPastePromptButton(), 1000)
+

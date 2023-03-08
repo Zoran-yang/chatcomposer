@@ -5,7 +5,6 @@
     "version": "1.0",
     "description": "paste prompt in chatGPT with easy step",
     "manifest_version": 3,
-    "icons": "pending",
     "action": {
       "default_popup": "index.html"
     },
@@ -15,5 +14,6 @@
         "js": ["content.js"]
       }
     ],
-    "permissions": ["tabs"]
+    "permissions": ["activeTab",
+    "tabs","scripting"]
   }

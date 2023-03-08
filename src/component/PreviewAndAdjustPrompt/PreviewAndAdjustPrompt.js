@@ -1,11 +1,17 @@
 import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import { useState } from 'react';
+import {submitPromptToOpenai} from"./submitPromptToOpenai"
 
 
 
 
 function PreviewAndAdjustPrompt({copiedPrompt, setComposerPhaseFunc}){
+    const [revisedPromt, setRevisedPromt] = useState(copiedPrompt)
+    function handleRevisedPromt(e){
+        setRevisedPromt(e.target.value)
+    }
 
 
     return (
@@ -24,15 +30,16 @@ function PreviewAndAdjustPrompt({copiedPrompt, setComposerPhaseFunc}){
                         id="outlined-multiline-static"
                         label="Adjust your prompt"
                         multiline
-                        rows={4}
+                        rows={10}
                         defaultValue={copiedPrompt}
+                        onChange = {handleRevisedPromt}
                     />
                     <div style={{
                             display:"flex",
                             justifyContent:"flex-end",
                             flexWrap: "wrap"
                         }}>
-                            <Button id="paste-button" variant="outlined" size="small">
+                            <Button variant="outlined" size="small" onClick={()=>submitPromptToOpenai(revisedPromt)}>
                                 Sumbit
                             </Button>
                             <Button variant="outlined" size="small" onClick={()=>setComposerPhaseFunc("ChoosePrompt")}>

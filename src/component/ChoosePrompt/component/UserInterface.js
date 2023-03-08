@@ -52,9 +52,9 @@ function UserInterface({setComposerPhaseFunc, setCopiedPromptFunc}){
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} aria-label="basic tabs example" onChange={handleChange}>
-                    <Tab label="DefaultPrompt" {...a11yProps(0)} />
-                    <Tab label="YourFavorite" {...a11yProps(1)} />
-                    <Tab label="YourHistory" {...a11yProps(2)} />
+                    <Tab label="Suggested Prompt" {...a11yProps(0)} />
+                    <Tab label="Your Favorite Prompt" {...a11yProps(1)} />
+                    <Tab label="Your History" {...a11yProps(2)} />
                 </Tabs>
             </Box>
                 <TabPanel value={value} index={0}>
