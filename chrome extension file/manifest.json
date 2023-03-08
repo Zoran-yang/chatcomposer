@@ -3,8 +3,11 @@
 {
     "name": "ChatGPT-Composer",
     "version": "1.0",
-    "description": "paste prompt in chatGPT with easy step",
+    "description": "Paste powerful prompt in chatGPT with easy step",
     "manifest_version": 3,
+    "icons": {
+      "32": "./Icon.png"
+    },
     "action": {
       "default_popup": "index.html"
     },

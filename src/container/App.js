@@ -22,6 +22,14 @@ function App() {
   const setCopiedPromptFunc = (CopiedPrompt) =>{
     setCopiedPrompt(CopiedPrompt)
   }
+
+  const [isEnglish, setIsEnglish] = useState(true);
+  const handleIsEnglish = (event) => {
+    if (isEnglish) setIsEnglish(false)
+    if (!isEnglish) setIsEnglish(true)
+  };
+
+
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
 
@@ -102,7 +110,7 @@ function App() {
       ) : 
         (activeStep === 1 ? 
           (<PreviewAndAdjustPrompt copiedPrompt={copiedPrompt} handleNext={handleNext} handleBack={handleBack} activeStep ={activeStep} TabName = {steps[activeStep]}/>) 
-          : (<ChoosePrompt handleNext={handleNext} setCopiedPromptFunc={setCopiedPromptFunc} activeStep ={activeStep} TabName = {steps[activeStep]}/>)
+          : (<ChoosePrompt handleIsEnglish={handleIsEnglish} isEnglish ={isEnglish} handleNext={handleNext} setCopiedPromptFunc={setCopiedPromptFunc} activeStep ={activeStep} TabName = {steps[activeStep]}/>)
         )
       }
     </Box>

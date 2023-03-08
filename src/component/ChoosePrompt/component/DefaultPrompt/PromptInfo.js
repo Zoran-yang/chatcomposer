@@ -23,8 +23,8 @@ const PromptInfo = {
     ,"Copywriting" : {
         "Social Media Copywriting":"Create a compelling, eye-catching [social media] post for [purpose]. The post should include [keyword 1], [keyword 2], and [keyword 3]. Also, it should follow these rules: [rule 1], [rule 2], [rule 3], and [rule 4].",
         "Social Media Post Title":"Write [5] social media post titles about [Topic] for [Social Media Platform], following these rules: [rule 1], [rule 2], and [rule 3]",
-        "Email Writing":"Write me a [formal] email to [recipient] about [purpose].",
-        "Email Writing":"You are a [position], I will send you an email, you need to reply to this email. Email: [attach content]",
+        "Email Writing-1":"Write me a [formal] email to [recipient] about [purpose].",
+        "Email Writing-2":"You are a [position], I will send you an email, you need to reply to this email. Email: [attach content]",
         "Production Description":"Write a [10] sentence product description for the following product keywords. Product keywords: [keyword 1], [keyword 2], [keyword 3], and [keyword 4].",
         "Outlines":"Write an outline for the following article: [attach content]",
         "Write a Blog Post":"Write a [number] word blog post about [topic].",

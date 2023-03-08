@@ -41,7 +41,7 @@ function a11yProps(index) {
 }
 
 
-function UserInterface({handleNext, setCopiedPromptFunc}){
+function UserInterface({handleNext, setCopiedPromptFunc, isEnglish}){
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -58,7 +58,7 @@ function UserInterface({handleNext, setCopiedPromptFunc}){
                 </Tabs>
             </Box>
                 <TabPanel value={value} index={0}>
-                    <DisplayDefaultPrompt handleNext={handleNext} setCopiedPromptFunc={setCopiedPromptFunc}></DisplayDefaultPrompt>
+                    <DisplayDefaultPrompt isEnglish ={isEnglish} handleNext={handleNext} setCopiedPromptFunc={setCopiedPromptFunc}></DisplayDefaultPrompt>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     Item Two

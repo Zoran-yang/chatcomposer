@@ -1,4 +1,5 @@
 import { PromptInfo } from "./PromptInfo"
+import {ChinesePromptInfo} from "./ChinesePromptInfo"
 import { useState } from "react"
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -45,10 +46,17 @@ function a11yProps(index) {
     };
 }
 
+function switchLanguage(status, english, chinese){
+    if (status) return english
+    return chinese
+
+}
+
 
  
-function DisplayDefaultPrompt({handleNext,setCopiedPromptFunc}){
+function DisplayDefaultPrompt({handleNext,setCopiedPromptFunc,isEnglish}){
     const [value, setValue] = useState(0);
+    const language = switchLanguage(isEnglish, PromptInfo, ChinesePromptInfo)
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -60,7 +68,7 @@ function DisplayDefaultPrompt({handleNext,setCopiedPromptFunc}){
     }
     
     function DisplayPromptDetail(){
-        return Object.values(PromptInfo).reduce((arr,curr,index) =>{
+        return Object.values(language).reduce((arr,curr,index) =>{
             arr.push(
                 <TabPanel key={index} value={value} index={index}>
                     {Object.entries(curr).map((type) => {
@@ -97,7 +105,7 @@ function DisplayDefaultPrompt({handleNext,setCopiedPromptFunc}){
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto" aria-label="scrollable auto tabs example">
-                    {Object.keys(PromptInfo).map((type, index) =>{return <Tab label={type} key={type} {...a11yProps(index)} />})}
+                    {Object.keys(language).map((type, index) =>{return <Tab label={type} key={type} {...a11yProps(index)} />})}
                 </Tabs>
             </Box>
             <DisplayPromptDetail></DisplayPromptDetail>      
