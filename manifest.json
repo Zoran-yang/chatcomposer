@@ -9,5 +9,11 @@
     "action": {
       "default_popup": "index.html"
     },
+    "content_scripts": [
+      {
+        "matches": ["https://chat.openai.com/*"],
+        "js": ["content.js"]
+      }
+    ],
     "permissions": ["tabs"]
   }

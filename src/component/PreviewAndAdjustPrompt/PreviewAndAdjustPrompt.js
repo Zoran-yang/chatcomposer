@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 
 function PreviewAndAdjustPrompt({copiedPrompt, setComposerPhaseFunc}){
 
+
     return (
         <>
             <Box
@@ -31,7 +32,7 @@ function PreviewAndAdjustPrompt({copiedPrompt, setComposerPhaseFunc}){
                             justifyContent:"flex-end",
                             flexWrap: "wrap"
                         }}>
-                            <Button variant="outlined" size="small">
+                            <Button id="paste-button" variant="outlined" size="small">
                                 Sumbit
                             </Button>
                             <Button variant="outlined" size="small" onClick={()=>setComposerPhaseFunc("ChoosePrompt")}>
