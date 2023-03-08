@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
@@ -7,7 +7,7 @@ import {submitPromptToOpenai} from"./submitPromptToOpenai"
 
 
 
-function PreviewAndAdjustPrompt({copiedPrompt, setComposerPhaseFunc}){
+function PreviewAndAdjustPrompt({copiedPrompt, handleNext, handleBack, activeStep,TabName}){
     const [revisedPromt, setRevisedPromt] = useState(copiedPrompt)
     function handleRevisedPromt(e){
         setRevisedPromt(e.target.value)
@@ -16,6 +16,7 @@ function PreviewAndAdjustPrompt({copiedPrompt, setComposerPhaseFunc}){
 
     return (
         <>
+            <Typography sx={{ mt: 2, mb: 1 }}>Step{activeStep + 1}  {TabName} </Typography>
             <Box
                 component="form"
                 sx={{
@@ -25,10 +26,10 @@ function PreviewAndAdjustPrompt({copiedPrompt, setComposerPhaseFunc}){
                 noValidate
                 autoComplete="off"
             >
-                <div style={{width: '50%'}}>
+                <div>
                     <TextField
                         id="outlined-multiline-static"
-                        label="Adjust your prompt"
+                        label="Revise your prompt"
                         multiline
                         rows={10}
                         defaultValue={copiedPrompt}
@@ -39,11 +40,14 @@ function PreviewAndAdjustPrompt({copiedPrompt, setComposerPhaseFunc}){
                             justifyContent:"flex-end",
                             flexWrap: "wrap"
                         }}>
-                            <Button variant="outlined" size="small" onClick={()=>submitPromptToOpenai(revisedPromt)}>
+                            <Button variant="outlined" size="small" onClick={()=>{
+                                handleNext()
+                                setTimeout(()=>submitPromptToOpenai(revisedPromt), 1000)
+                            }}>
                                 Sumbit
                             </Button>
-                            <Button variant="outlined" size="small" onClick={()=>setComposerPhaseFunc("ChoosePrompt")}>
-                                Cancel
+                            <Button variant="outlined" size="small" onClick={handleBack}>
+                                Back
                             </Button>  
                     </div>
                 </div>

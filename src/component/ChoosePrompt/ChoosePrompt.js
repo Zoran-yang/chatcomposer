@@ -1,14 +1,15 @@
+import { Typography } from "@mui/material"
 import { UserInterface } from "./component/UserInterface"
 
 
 
 
-function ChoosePrompt({setComposerPhaseFunc,setCopiedPromptFunc}){
+function ChoosePrompt({handleNext,setCopiedPromptFunc,activeStep,TabName}){
 
     return(
         <>
-            <h1>Choose prompt</h1>
-            <UserInterface setComposerPhaseFunc={setComposerPhaseFunc} setCopiedPromptFunc={setCopiedPromptFunc}/>
+            <Typography sx={{ mt: 2, mb: 1 }}>Step{activeStep + 1}  {TabName} </Typography>
+            <UserInterface handleNext={handleNext} setCopiedPromptFunc={setCopiedPromptFunc}/>
         </>
     )
 }

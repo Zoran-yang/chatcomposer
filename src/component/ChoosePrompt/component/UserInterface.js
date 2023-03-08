@@ -41,7 +41,7 @@ function a11yProps(index) {
 }
 
 
-function UserInterface({setComposerPhaseFunc, setCopiedPromptFunc}){
+function UserInterface({handleNext, setCopiedPromptFunc}){
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -51,14 +51,14 @@ function UserInterface({setComposerPhaseFunc, setCopiedPromptFunc}){
     return(
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} aria-label="basic tabs example" onChange={handleChange}>
+                <Tabs value={value} variant="scrollable" scrollButtons="auto" aria-label="scrollable auto tabs example" onChange={handleChange}>
                     <Tab label="Suggested Prompt" {...a11yProps(0)} />
-                    <Tab label="Your Favorite Prompt" {...a11yProps(1)} />
-                    <Tab label="Your History" {...a11yProps(2)} />
+                    {/* <Tab label="Your Favorite Prompt" {...a11yProps(1)} /> */}
+                    {/* <Tab label="Your History" {...a11yProps(2)} /> */}
                 </Tabs>
             </Box>
                 <TabPanel value={value} index={0}>
-                    <DisplayDefaultPrompt setComposerPhaseFunc={setComposerPhaseFunc} setCopiedPromptFunc={setCopiedPromptFunc}></DisplayDefaultPrompt>
+                    <DisplayDefaultPrompt handleNext={handleNext} setCopiedPromptFunc={setCopiedPromptFunc}></DisplayDefaultPrompt>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     Item Two
