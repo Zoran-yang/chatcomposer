@@ -11,7 +11,7 @@
     var tab = tabs[0];
     chrome.tabs.update(tabs[0].id, {active: true});
     chrome.scripting.executeScript({ target: { tabId: tab.id}, files:['./content.js']}, ()=> {
-      chrome.scripting.executeScript({ target: { tabId: tab.id}, args:[prompt], func: (...args)=> {setTimeout(()=>pastePromptInTextarea(...args), 1000)}});
+      chrome.scripting.executeScript({ target: { tabId: tab.id}, args:[prompt], func: (...args)=> {setTimeout(()=>pastePromptInTextarea(...args), 500)}});
     })
   });
 };

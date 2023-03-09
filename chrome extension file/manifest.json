@@ -1,12 +1,13 @@
 
 
 {
-    "name": "ChatGPT-Composer",
+    "name": "ChatGPT Plus",
     "version": "1.0",
     "description": "Paste powerful prompt in chatGPT with easy step",
     "manifest_version": 3,
     "icons": {
-      "32": "./Icon.png"
+      "32": "./Icon32.png",
+      "128": "./Icon128.png"
     },
     "action": {
       "default_popup": "index.html"
