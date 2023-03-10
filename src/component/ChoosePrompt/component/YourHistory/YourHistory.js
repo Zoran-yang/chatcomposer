@@ -1,10 +1,23 @@
+import { Typography } from "@mui/material"
 
 
 function YourHistory(){
-    return(
-        <>
-            <h2>Your History</h2>
-        </>
+    let promptHistory = JSON.parse(localStorage.getItem('promptHistory')) || []
+    if (!promptHistory.length){
+        return(
+            <Typography>
+                No History.
+            </Typography>
+        )
+    }
+    return (
+        promptHistory.map((prompt) => {
+            return(
+                <Typography>
+                    {prompt}
+                </Typography>
+            )
+        })
     )
 }
 

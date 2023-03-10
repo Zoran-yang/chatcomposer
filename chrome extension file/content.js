@@ -2,7 +2,7 @@
 async function pastePromptInTextarea(prompt) {
   const conversationField = document.querySelector('textarea')
   const Buttons = document.querySelectorAll('button')
-  const submitButton = Buttons[Buttons.length-1]
+  // const submitButton = Buttons[Buttons.length-1]
   if (!conversationField) {
     return
   }
@@ -11,7 +11,7 @@ async function pastePromptInTextarea(prompt) {
     // const prompt = await navigator.clipboard.readText()
     conversationField.value = prompt
     conversationField.dispatchEvent(new InputEvent('input', { bubbles: true }))
-    submitButton.click()
+    // submitButton.click()
   }
   await pastePrompt()
 }

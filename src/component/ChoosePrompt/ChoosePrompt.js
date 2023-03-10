@@ -4,7 +4,7 @@ import Switch from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
 
 
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
+// const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 28,
@@ -50,22 +50,20 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 
 
 function ChoosePrompt({handleNext,setCopiedPromptFunc,activeStep,TabName,handleIsEnglish,isEnglish}){
-
-    return(
-        <>
-            <Box sx ={{display :"flex", alignContent: "center"}}>
-                <Typography sx={{ m: "auto", p:"1"}}>Step{activeStep + 1}  {TabName} </Typography>
-                <Box sx={{ flex: '1 1 auto' }} />
-                <Stack direction="row" spacing={1} alignItems="center">
-                    <Typography>中</Typography>
-                    <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} onClick={handleIsEnglish}/>
-                    <Typography>English</Typography>
-                </Stack>
-            </Box>
-
-            <UserInterface handleIsEnglish={handleIsEnglish} isEnglish ={isEnglish} handleNext={handleNext} setCopiedPromptFunc={setCopiedPromptFunc}/>
-        </>
-    )
+  return(
+    <>
+      <Box sx ={{display :"flex", alignContent: "center"}}>
+          <Typography sx={{ m: "auto", p:"1"}}>Step{activeStep + 1}  {TabName} </Typography>
+          <Box sx={{ flex: '1 1 auto' }} />
+          <Stack direction="row" spacing={1} alignItems="center">
+              <Typography>中</Typography>
+              <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} onClick={handleIsEnglish}/>
+              <Typography>English</Typography>
+          </Stack>
+      </Box>
+      <UserInterface handleIsEnglish={handleIsEnglish} isEnglish ={isEnglish} handleNext={handleNext} setCopiedPromptFunc={setCopiedPromptFunc}/>
+    </>
+  )
 }
 
 export {ChoosePrompt}

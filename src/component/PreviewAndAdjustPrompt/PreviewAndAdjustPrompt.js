@@ -13,6 +13,13 @@ function PreviewAndAdjustPrompt({copiedPrompt, handleNext, handleBack, activeSte
         setRevisedPromt(e.target.value)
     }
 
+    function savePromptInBrowser(prompt){
+        let promptHistory = JSON.parse(localStorage.getItem('messageHistory')) || [];
+        promptHistory.unshift(prompt);
+        localStorage.setItem('messageHistory', JSON.stringify(promptHistory));
+    }
+    
+
 
     return (
         <>
@@ -42,7 +49,8 @@ function PreviewAndAdjustPrompt({copiedPrompt, handleNext, handleBack, activeSte
                         }}>
                             <Button variant="outlined" size="small" onClick={()=>{
                                 handleNext()
-                                setTimeout(()=>submitPromptToOpenai(revisedPromt), 1000)
+                                savePromptInBrowser(copiedPrompt)
+                                setTimeout(()=>submitPromptToOpenai(revisedPromt), 500)
                             }}>
                                 Sumbit
                             </Button>

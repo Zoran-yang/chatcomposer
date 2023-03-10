@@ -3,9 +3,9 @@
   "name": "ChatGPT_Composer",
   "icons": [
     {
-      "src": "Icon.png",
+      "src": "./Icon.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "32x32 24x24 16x16"
     }
   ],
   "start_url": ".",

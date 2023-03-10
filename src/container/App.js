@@ -14,11 +14,8 @@ import Typography from '@mui/material/Typography';
 const steps = ['Choose your prompt', 'Preview and adjust your prompt'];
 
 function App() {
-  // const [composerPhase, setComposerPhase] = useState("ChoosePrompt")
+
   const [copiedPrompt, setCopiedPrompt] = useState("")  //set textfield of PreviewAndAdjustPrompt
-  // const setComposerPhaseFunc = (newPhase) => {
-  //   setComposerPhase(newPhase)
-  // }
   const setCopiedPromptFunc = (CopiedPrompt) =>{
     setCopiedPrompt(CopiedPrompt)
   }
