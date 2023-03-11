@@ -3,11 +3,12 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 import {submitPromptToOpenai} from"./submitPromptToOpenai"
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 
 
 
 
-function PreviewAndAdjustPrompt({copiedPrompt, handleNext, handleBack, activeStep,TabName}){
+function PreviewAndAdjustPrompt({copiedPrompt, handleNext, handleBack, activeStep, TabName, setPromptToMyFavorite}){
     const [revisedPromt, setRevisedPromt] = useState(copiedPrompt)
     function handleRevisedPromt(e){
         setRevisedPromt(e.target.value)
@@ -53,6 +54,9 @@ function PreviewAndAdjustPrompt({copiedPrompt, handleNext, handleBack, activeSte
                             justifyContent:"flex-end",
                             flexWrap: "wrap"
                     }}>
+                        <Button>
+                            <FavoriteBorderOutlinedIcon onClick={()=> setPromptToMyFavorite(revisedPromt)}/>
+                        </Button>                        
                         <Button variant="outlined" size="small" onClick={()=>{
                             submitAndSavePrompt()
                         }}>

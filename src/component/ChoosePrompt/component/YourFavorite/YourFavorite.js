@@ -1,15 +1,20 @@
 import { Box, Button, Divider, List, ListItem, ListItemText, Typography } from "@mui/material";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 
 
 
 
-function YourFavorite({copyPromptToNextPhase, FavoritePrompt}){
+function YourFavorite({copyPromptToNextPhase, FavoritePrompt, handleFavoritePrompt}){
     
-    // function handleFavoritePrompt(){
-    //     localStorage.removeItem('My Favorite prompt');
-    //     setFavoritePrompt([])
-    // }
+    function deleteFavoritePrompt(index){
+        if (index > -1) {
+            FavoritePrompt.splice(index, 1)
+            const revisedFavoritePrompt = [...FavoritePrompt];
+            handleFavoritePrompt(revisedFavoritePrompt)
+            localStorage.setItem('My Favorite prompt', JSON.stringify(revisedFavoritePrompt))
+        }
+    }
     
     if (!FavoritePrompt.length){
         return(
@@ -21,11 +26,17 @@ function YourFavorite({copyPromptToNextPhase, FavoritePrompt}){
     return (
         <Box >
             <List sx={{maxHeight: 300, overflow:'auto'}}>
-                {FavoritePrompt.map((prompt) => {
+                {FavoritePrompt.map((prompt, index) => {
                     return(
                         <Fragment key={prompt}>
                             <ListItem component="div" sx={{display:"block"}}>
-                                <ListItemText primary={prompt} />
+                                <div style={{display:"flex"}}>
+                                    <ListItemText primary={prompt} />
+                                    <Button variant="outlined" size="small" onClick={() => deleteFavoritePrompt(index)}>
+                                        <DeleteForeverOutlinedIcon />
+                                    </Button>
+                                </div>
+
                                 <>
                                     <Button variant="outlined" size="small" onClick={() => copyPromptToNextPhase(prompt)}>
                                         Choose and Next

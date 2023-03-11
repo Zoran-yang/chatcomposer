@@ -1,9 +1,12 @@
 import { Box, Button, Divider, List, ListItem, ListItemText, Typography } from "@mui/material"
 import { Fragment, useState } from "react";
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+
+
+
 const localPromptHistory = JSON.parse(localStorage.getItem('promptHistory')||"[]");
 
-
-function YourHistory({copyPromptToNextPhase}){
+function YourHistory({copyPromptToNextPhase, setPromptToMyFavorite}){
 
     const [promptHistory, setPromptHistory] = useState(localPromptHistory)
     function handlePromptHistory(){
@@ -25,7 +28,13 @@ function YourHistory({copyPromptToNextPhase}){
                     return(
                         <Fragment key={prompt}>
                             <ListItem component="div" sx={{display:"block"}}>
-                                <ListItemText primary={prompt} />
+                                <div style={{display:"flex"}}>
+                                    <ListItemText primary={prompt} />
+                                    <Button>
+                                        <FavoriteBorderOutlinedIcon onClick={()=> setPromptToMyFavorite(prompt)}/>
+                                    </Button>
+                                </div>                                
+
                                 <>
                                     <Button variant="outlined" size="small" onClick={() => copyPromptToNextPhase(prompt)}>
                                         Choose and Next

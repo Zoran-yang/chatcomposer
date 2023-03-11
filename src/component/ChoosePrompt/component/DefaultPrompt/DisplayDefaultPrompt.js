@@ -54,7 +54,6 @@ function switchLanguage(status, english, chinese){
 
 }
 
-
  
 function DisplayDefaultPrompt({setPromptToMyFavorite,isEnglish,copyPromptToNextPhase}){
     const [value, setValue] = useState(0);

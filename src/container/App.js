@@ -26,6 +26,9 @@ function App() {
   };
 
   const [FavoritePrompt, setFavoritePrompt] = useState(localFavoritePrompt)
+  const handleFavoritePrompt = (prompt) => {
+    setFavoritePrompt(prompt)
+  }
   const setPromptToMyFavorite = (prompt) => {
     FavoritePrompt.unshift(prompt);
     localStorage.setItem('My Favorite prompt', JSON.stringify(FavoritePrompt));
@@ -117,6 +120,7 @@ function App() {
               handleBack={handleBack} 
               activeStep ={activeStep} 
               TabName = {steps[activeStep]}
+              setPromptToMyFavorite = {setPromptToMyFavorite}
             />) 
           : (<ChoosePrompt 
                 handleIsEnglish={handleIsEnglish} 
@@ -127,6 +131,7 @@ function App() {
                 TabName = {steps[activeStep]}
                 FavoritePrompt = {FavoritePrompt}
                 setPromptToMyFavorite = {setPromptToMyFavorite}
+                handleFavoritePrompt = {handleFavoritePrompt}
               />)
         )
       }

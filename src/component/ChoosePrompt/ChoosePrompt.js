@@ -47,7 +47,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
   }));
 
 
-function ChoosePrompt({handleNext,setCopiedPromptFunc,activeStep,TabName,handleIsEnglish,isEnglish,setPromptToMyFavorite,FavoritePrompt}){
+function ChoosePrompt({handleNext, setCopiedPromptFunc, activeStep, TabName, handleIsEnglish, isEnglish, setPromptToMyFavorite, FavoritePrompt, handleFavoritePrompt}){
   return(
     <>
       <Box sx ={{display :"flex", alignContent: "center"}}>
@@ -66,6 +66,7 @@ function ChoosePrompt({handleNext,setCopiedPromptFunc,activeStep,TabName,handleI
         setCopiedPromptFunc={setCopiedPromptFunc}
         setPromptToMyFavorite ={setPromptToMyFavorite}
         FavoritePrompt = {FavoritePrompt}
+        handleFavoritePrompt = {handleFavoritePrompt}
       />
     </>
   )

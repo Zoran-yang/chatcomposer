@@ -42,7 +42,7 @@ function a11yProps(index) {
 }
 
 
-function UserInterface({handleNext, setCopiedPromptFunc, isEnglish, setPromptToMyFavorite, FavoritePrompt}){
+function UserInterface({handleNext, setCopiedPromptFunc, isEnglish, setPromptToMyFavorite, FavoritePrompt, handleFavoritePrompt}){
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -74,10 +74,10 @@ function UserInterface({handleNext, setCopiedPromptFunc, isEnglish, setPromptToM
             </DisplayDefaultPrompt>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <YourFavorite copyPromptToNextPhase={copyPromptToNextPhase} FavoritePrompt={FavoritePrompt}/>
+          <YourFavorite copyPromptToNextPhase={copyPromptToNextPhase} FavoritePrompt={FavoritePrompt} handleFavoritePrompt={handleFavoritePrompt}/>
         </TabPanel>
         <TabPanel value={value} index={2}>
-            <YourHistory copyPromptToNextPhase={copyPromptToNextPhase}/>
+            <YourHistory copyPromptToNextPhase={copyPromptToNextPhase} setPromptToMyFavorite={setPromptToMyFavorite}/>
         </TabPanel>
     </Box>
   )
