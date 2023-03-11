@@ -4,8 +4,6 @@ import Switch from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
 
 
-// const label = { inputProps: { 'aria-label': 'Switch demo' } };
-
 const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 28,
     height: 16,

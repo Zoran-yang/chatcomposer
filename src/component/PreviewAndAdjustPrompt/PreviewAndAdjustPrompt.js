@@ -13,13 +13,21 @@ function PreviewAndAdjustPrompt({copiedPrompt, handleNext, handleBack, activeSte
         setRevisedPromt(e.target.value)
     }
 
-    function savePromptInBrowser(prompt){
-        let promptHistory = JSON.parse(localStorage.getItem('messageHistory')) || [];
+
+    async function savePromptInBrowser(prompt){
+        let promptHistory = await JSON.parse(localStorage.getItem('promptHistory')||"[]") ;
+        console.log(promptHistory)
+        // localStorage.removeItem('promptHistory')
         promptHistory.unshift(prompt);
-        localStorage.setItem('messageHistory', JSON.stringify(promptHistory));
+        localStorage.setItem('promptHistory', JSON.stringify(promptHistory));
+        
     }
     
-
+    async function submitAndSavePrompt(){
+        handleNext()
+        await savePromptInBrowser(revisedPromt)
+        // setTimeout(()=>submitPromptToOpenai(revisedPromt), 500)        
+    }
 
     return (
         <>
@@ -46,17 +54,15 @@ function PreviewAndAdjustPrompt({copiedPrompt, handleNext, handleBack, activeSte
                             display:"flex",
                             justifyContent:"flex-end",
                             flexWrap: "wrap"
+                    }}>
+                        <Button variant="outlined" size="small" onClick={()=>{
+                            submitAndSavePrompt()
                         }}>
-                            <Button variant="outlined" size="small" onClick={()=>{
-                                handleNext()
-                                savePromptInBrowser(copiedPrompt)
-                                setTimeout(()=>submitPromptToOpenai(revisedPromt), 500)
-                            }}>
-                                Sumbit
-                            </Button>
-                            <Button variant="outlined" size="small" onClick={handleBack}>
-                                Back
-                            </Button>  
+                            Sumbit
+                        </Button>
+                        <Button variant="outlined" size="small" onClick={handleBack}>
+                            Back
+                        </Button>  
                     </div>
                 </div>
             </Box>

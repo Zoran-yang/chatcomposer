@@ -49,6 +49,11 @@ function UserInterface({handleNext, setCopiedPromptFunc, isEnglish}){
     setValue(newValue);
   };
 
+  function copyPromptToNextPhase(CopiedPrompt){
+    setCopiedPromptFunc(CopiedPrompt)
+    handleNext()
+  }
+
   return(
     <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -59,10 +64,10 @@ function UserInterface({handleNext, setCopiedPromptFunc, isEnglish}){
             </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-            <DisplayDefaultPrompt isEnglish ={isEnglish} handleNext={handleNext} setCopiedPromptFunc={setCopiedPromptFunc}></DisplayDefaultPrompt>
+            <DisplayDefaultPrompt isEnglish ={isEnglish} handleNext={handleNext} setCopiedPromptFunc={setCopiedPromptFunc} copyPromptToNextPhase={copyPromptToNextPhase}></DisplayDefaultPrompt>
         </TabPanel>
         <TabPanel value={value} index={1}>
-            <YourHistory />
+            <YourHistory copyPromptToNextPhase={copyPromptToNextPhase}/>
         </TabPanel>
         <TabPanel value={value} index={2}>
             Item Three

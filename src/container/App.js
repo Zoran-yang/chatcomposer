@@ -44,7 +44,6 @@ function App() {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
-    console.log(activeStep)
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);

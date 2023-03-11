@@ -11,6 +11,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
+import { Divider } from "@mui/material";
 
 
 
@@ -54,7 +55,7 @@ function switchLanguage(status, english, chinese){
 
 
  
-function DisplayDefaultPrompt({handleNext,setCopiedPromptFunc,isEnglish}){
+function DisplayDefaultPrompt({handleNext,setCopiedPromptFunc,isEnglish,copyPromptToNextPhase}){
     const [value, setValue] = useState(0);
     const language = switchLanguage(isEnglish, PromptInfo, ChinesePromptInfo)
 
@@ -62,10 +63,6 @@ function DisplayDefaultPrompt({handleNext,setCopiedPromptFunc,isEnglish}){
       setValue(newValue);
     };
 
-    function copyPromptToNextPhase(CopiedPrompt){
-        setCopiedPromptFunc(CopiedPrompt)
-        handleNext()
-    }
     
     function DisplayPromptDetail(){
         return Object.values(language).reduce((arr,curr,index) =>{
@@ -82,6 +79,7 @@ function DisplayDefaultPrompt({handleNext,setCopiedPromptFunc,isEnglish}){
                                 >
                                     <Typography sx={{display: "flex",alignItems:"center"}}>{type[0]}</Typography>
                                 </AccordionSummary>
+                                <Divider />
                                 <AccordionDetails >
                                     <Typography>
                                         {type[1]}
