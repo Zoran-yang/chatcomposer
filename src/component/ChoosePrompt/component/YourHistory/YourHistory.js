@@ -1,5 +1,5 @@
 import { Box, Button, Divider, List, ListItem, ListItemText, Typography } from "@mui/material"
-import { useState } from "react";
+import { Fragment, useState } from "react";
 const localPromptHistory = JSON.parse(localStorage.getItem('promptHistory')||"[]");
 
 
@@ -23,7 +23,7 @@ function YourHistory({copyPromptToNextPhase}){
             <List sx={{maxHeight: 300, overflow:'auto'}}>
                 {promptHistory.map((prompt) => {
                     return(
-                        <>
+                        <Fragment key={prompt}>
                             <ListItem component="div" sx={{display:"block"}}>
                                 <ListItemText primary={prompt} />
                                 <>
@@ -33,7 +33,7 @@ function YourHistory({copyPromptToNextPhase}){
                                 </>
                             </ListItem>                            
                             <Divider />                 
-                        </>
+                        </Fragment>
                     )
                 })}
             </List>

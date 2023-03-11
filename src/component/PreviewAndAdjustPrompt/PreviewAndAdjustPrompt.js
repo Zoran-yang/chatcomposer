@@ -14,10 +14,8 @@ function PreviewAndAdjustPrompt({copiedPrompt, handleNext, handleBack, activeSte
     }
 
 
-    async function savePromptInBrowser(prompt){
-        let promptHistory = await JSON.parse(localStorage.getItem('promptHistory')||"[]") ;
-        console.log(promptHistory)
-        // localStorage.removeItem('promptHistory')
+    function savePromptInBrowser(prompt){
+        let promptHistory = JSON.parse(localStorage.getItem('promptHistory')||"[]") ;
         promptHistory.unshift(prompt);
         localStorage.setItem('promptHistory', JSON.stringify(promptHistory));
         

@@ -12,6 +12,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import { Divider } from "@mui/material";
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 
 
 
@@ -55,7 +56,7 @@ function switchLanguage(status, english, chinese){
 
 
  
-function DisplayDefaultPrompt({handleNext,setCopiedPromptFunc,isEnglish,copyPromptToNextPhase}){
+function DisplayDefaultPrompt({setPromptToMyFavorite,isEnglish,copyPromptToNextPhase}){
     const [value, setValue] = useState(0);
     const language = switchLanguage(isEnglish, PromptInfo, ChinesePromptInfo)
 
@@ -81,9 +82,16 @@ function DisplayDefaultPrompt({handleNext,setCopiedPromptFunc,isEnglish,copyProm
                                 </AccordionSummary>
                                 <Divider />
                                 <AccordionDetails >
-                                    <Typography>
-                                        {type[1]}
-                                    </Typography>
+                                    <div style={{display:"flex"}}>
+                                        <Typography>
+                                            {type[1]}
+                                        </Typography>
+                                        <Button>
+                                            <FavoriteBorderOutlinedIcon onClick={()=> setPromptToMyFavorite(type[1])}/>
+                                        </Button>
+                                    </div>
+
+                                    
                                     <Button variant="outlined" size="small" onClick={() => copyPromptToNextPhase(type[1])}>
                                             Choose and Next
                                     </Button>

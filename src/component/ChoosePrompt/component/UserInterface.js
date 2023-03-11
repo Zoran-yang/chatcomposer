@@ -1,4 +1,3 @@
-// import "./Tab.css"
 
 import { Box, Tabs} from "@mui/material";
 import PropTypes from 'prop-types';
@@ -6,6 +5,7 @@ import { useState } from "react";
 import Tab from '@mui/material/Tab';
 import { DisplayDefaultPrompt } from "./DefaultPrompt/DisplayDefaultPrompt";
 import {YourHistory} from "./YourHistory/YourHistory"
+import { YourFavorite } from "./YourFavorite/YourFavorite";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -42,7 +42,7 @@ function a11yProps(index) {
 }
 
 
-function UserInterface({handleNext, setCopiedPromptFunc, isEnglish}){
+function UserInterface({handleNext, setCopiedPromptFunc, isEnglish, setPromptToMyFavorite, FavoritePrompt}){
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -59,18 +59,25 @@ function UserInterface({handleNext, setCopiedPromptFunc, isEnglish}){
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs value={value} variant="scrollable" scrollButtons="auto" aria-label="scrollable auto tabs example" onChange={handleChange}>
                 <Tab label="Suggested Prompt" {...a11yProps(0)} />
-                {/* <Tab label="Your Favorite Prompt" {...a11yProps(1)} /> */}
-                <Tab label="Your History" {...a11yProps(1)} />
+                <Tab label="My Favorite Prompt" {...a11yProps(1)} />
+                <Tab label="My History" {...a11yProps(2)} />
             </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-            <DisplayDefaultPrompt isEnglish ={isEnglish} handleNext={handleNext} setCopiedPromptFunc={setCopiedPromptFunc} copyPromptToNextPhase={copyPromptToNextPhase}></DisplayDefaultPrompt>
+            <DisplayDefaultPrompt 
+              isEnglish ={isEnglish} 
+              handleNext={handleNext} 
+              setCopiedPromptFunc={setCopiedPromptFunc} 
+              copyPromptToNextPhase={copyPromptToNextPhase}
+              setPromptToMyFavorite={setPromptToMyFavorite}
+            >
+            </DisplayDefaultPrompt>
         </TabPanel>
         <TabPanel value={value} index={1}>
-            <YourHistory copyPromptToNextPhase={copyPromptToNextPhase}/>
+          <YourFavorite copyPromptToNextPhase={copyPromptToNextPhase} FavoritePrompt={FavoritePrompt}/>
         </TabPanel>
         <TabPanel value={value} index={2}>
-            Item Three
+            <YourHistory copyPromptToNextPhase={copyPromptToNextPhase}/>
         </TabPanel>
     </Box>
   )

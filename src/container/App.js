@@ -1,6 +1,5 @@
 
 import './App.css';
-import {UploadContent} from "../component/UploadContent/UploadContent"
 import {ChoosePrompt} from "../component/ChoosePrompt/ChoosePrompt"
 import {PreviewAndAdjustPrompt} from "../component/PreviewAndAdjustPrompt/PreviewAndAdjustPrompt"
 import { useState } from 'react';
@@ -8,10 +7,10 @@ import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 const steps = ['Choose your prompt', 'Preview and adjust your prompt'];
+const localFavoritePrompt = JSON.parse(localStorage.getItem('My Favorite prompt')||"[]");
 
 function App() {
 
@@ -25,6 +24,12 @@ function App() {
     if (isEnglish) setIsEnglish(false)
     if (!isEnglish) setIsEnglish(true)
   };
+
+  const [FavoritePrompt, setFavoritePrompt] = useState(localFavoritePrompt)
+  const setPromptToMyFavorite = (prompt) => {
+    FavoritePrompt.unshift(prompt);
+    localStorage.setItem('My Favorite prompt', JSON.stringify(FavoritePrompt));
+  }
 
 
   const [activeStep, setActiveStep] = useState(0);
@@ -72,6 +77,7 @@ function App() {
     setActiveStep(0);
   };
 
+
   return (
     <Box sx={{ width: '100%' }}>
       <Stepper activeStep={activeStep}>
@@ -105,8 +111,23 @@ function App() {
         </>
       ) : 
         (activeStep === 1 ? 
-          (<PreviewAndAdjustPrompt copiedPrompt={copiedPrompt} handleNext={handleNext} handleBack={handleBack} activeStep ={activeStep} TabName = {steps[activeStep]}/>) 
-          : (<ChoosePrompt handleIsEnglish={handleIsEnglish} isEnglish ={isEnglish} handleNext={handleNext} setCopiedPromptFunc={setCopiedPromptFunc} activeStep ={activeStep} TabName = {steps[activeStep]}/>)
+          (<PreviewAndAdjustPrompt 
+              copiedPrompt={copiedPrompt} 
+              handleNext={handleNext} 
+              handleBack={handleBack} 
+              activeStep ={activeStep} 
+              TabName = {steps[activeStep]}
+            />) 
+          : (<ChoosePrompt 
+                handleIsEnglish={handleIsEnglish} 
+                isEnglish ={isEnglish} 
+                handleNext={handleNext} 
+                setCopiedPromptFunc={setCopiedPromptFunc} 
+                activeStep ={activeStep} 
+                TabName = {steps[activeStep]}
+                FavoritePrompt = {FavoritePrompt}
+                setPromptToMyFavorite = {setPromptToMyFavorite}
+              />)
         )
       }
     </Box>
