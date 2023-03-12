@@ -8,11 +8,18 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import { ChinesePromptInfo } from '../component/ChoosePrompt/component/DefaultPrompt/ChinesePromptInfo';
+import { PromptInfo } from '../component/ChoosePrompt/component/DefaultPrompt/PromptInfo';
 
-const steps = ['Choose your prompt', 'Preview and adjust your prompt'];
-const localFavoritePrompt = JSON.parse(localStorage.getItem('My Favorite prompt')||"[]");
+
+
 
 function App() {
+
+  const steps = ['Choose your prompt', 'Preview and adjust your prompt'];
+  const localFavoritePrompt = JSON.parse(localStorage.getItem('My Favorite prompt')||"[]");
 
   const [copiedPrompt, setCopiedPrompt] = useState("")  //set textfield of PreviewAndAdjustPrompt
   const setCopiedPromptFunc = (CopiedPrompt) =>{
@@ -79,6 +86,14 @@ function App() {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+  function isFavorite(isFavoriteState){
+    isFavoriteState = !isFavoriteState
+    if (isFavoriteState) {  //現在為正，就代表之前為負
+      return <FavoriteBorderOutlinedIcon/>
+    }
+    return <FavoriteOutlinedIcon/>
+  }
 
 
   return (

@@ -1,6 +1,7 @@
 import { Box, Button, Divider, List, ListItem, ListItemText, Typography } from "@mui/material";
 import { Fragment } from "react";
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import { pink } from "@mui/material/colors";
 
 
 
@@ -32,11 +33,10 @@ function YourFavorite({copyPromptToNextPhase, FavoritePrompt, handleFavoriteProm
                             <ListItem component="div" sx={{display:"block"}}>
                                 <div style={{display:"flex"}}>
                                     <ListItemText primary={prompt} />
-                                    <Button variant="outlined" size="small" onClick={() => deleteFavoritePrompt(index)}>
-                                        <DeleteForeverOutlinedIcon />
+                                    <Button variant="outlined" size="small" color="error" onClick={() => deleteFavoritePrompt(index)}>
+                                        <DeleteForeverOutlinedIcon sx={{ color: pink[500] }}/>
                                     </Button>
                                 </div>
-
                                 <>
                                     <Button variant="outlined" size="small" onClick={() => copyPromptToNextPhase(prompt)}>
                                         Choose and Next

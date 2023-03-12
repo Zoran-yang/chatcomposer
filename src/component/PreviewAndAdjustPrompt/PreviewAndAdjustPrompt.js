@@ -25,7 +25,7 @@ function PreviewAndAdjustPrompt({copiedPrompt, handleNext, handleBack, activeSte
     async function submitAndSavePrompt(){
         handleNext()
         await savePromptInBrowser(revisedPromt)
-        // setTimeout(()=>submitPromptToOpenai(revisedPromt), 500)        
+        setTimeout(()=>submitPromptToOpenai(revisedPromt), 500)        
     }
 
     return (
