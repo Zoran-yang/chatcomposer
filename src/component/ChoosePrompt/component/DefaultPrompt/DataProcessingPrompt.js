@@ -3,8 +3,8 @@
 import { ChinesePromptInfo } from "./ChinesePromptInfo";
 import { PromptInfo } from "./PromptInfo";
 
-ChinesePromptInfo = DataProcess(ChinesePromptInfo)
-PromptInfo = DataProcess(PromptInfo)
+let NewChinesePromptInfo = DataProcess(ChinesePromptInfo)
+let NewPromptInfo = DataProcess(PromptInfo)
 
 
 function DataProcess(data){
@@ -12,15 +12,12 @@ function DataProcess(data){
     let PromptActivityType = Object.keys(data)
     let PromptActivityTitle = getPromptActivityTitle(data)
     let PromptDetail = getPromptActivityDetail(data)
-
     return {
         "object" : object,
         "PromptActivityType" : PromptActivityType,
         "PromptActivityTitle" : PromptActivityTitle,
         "PromptDetail" : PromptDetail,
     }
-
-    
 }
 
 function getPromptActivityTitle(data){
@@ -38,7 +35,7 @@ function getPromptActivityDetail(data) {
         arr.push( Object.values(curr))
         return arr
     },[])
-    promptActivityTypeAndDetail = addIsFavoriteProp(promptActivityTypeAndDetail)
+    promptActivityDetail = addIsFavoriteProp(promptActivityDetail)
     return promptActivityDetail
 }
 
@@ -59,4 +56,4 @@ function addIsFavoriteProp(data){
 
 
 
-export {ChinesePromptInfo, PromptInfo}
+export {NewChinesePromptInfo, NewPromptInfo}

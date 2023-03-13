@@ -10,8 +10,7 @@ import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
-import { ChinesePromptInfo } from '../component/ChoosePrompt/component/DefaultPrompt/ChinesePromptInfo';
-import { PromptInfo } from '../component/ChoosePrompt/component/DefaultPrompt/PromptInfo';
+import { Button } from '@mui/material';
 
 
 
@@ -40,6 +39,14 @@ function App() {
     FavoritePrompt.unshift(prompt);
     localStorage.setItem('My Favorite prompt', JSON.stringify(FavoritePrompt));
   }
+  function deleteFavoritePrompt(index){
+    if (index > -1) {
+        FavoritePrompt.splice(index, 1)
+        const revisedFavoritePrompt = [...FavoritePrompt];
+        handleFavoritePrompt(revisedFavoritePrompt)
+        localStorage.setItem('My Favorite prompt', JSON.stringify(revisedFavoritePrompt))
+    }
+}
 
 
   const [activeStep, setActiveStep] = useState(0);
@@ -87,12 +94,22 @@ function App() {
     setActiveStep(0);
   };
 
-  function isFavorite(isFavoriteState){
+  function IsFavoriteButton({isFavoriteState, PromptInfo, PromptInfoindex}){
     isFavoriteState = !isFavoriteState
     if (isFavoriteState) {  //現在為正，就代表之前為負
-      return <FavoriteBorderOutlinedIcon/>
+      return (
+        <Button variant="outlined" size="small" onClick={()=> setPromptToMyFavorite(PromptInfo)}>
+          <FavoriteBorderOutlinedIcon />                                    
+        </Button> 
+        
+      )
+      
     }
-    return <FavoriteOutlinedIcon/>
+    return (
+      <Button variant="outlined" size="small" onClick={() => deleteFavoritePrompt(PromptInfoindex)}>
+        <FavoriteOutlinedIcon />                               
+      </Button>       
+    )
   }
 
 
@@ -147,6 +164,8 @@ function App() {
                 FavoritePrompt = {FavoritePrompt}
                 setPromptToMyFavorite = {setPromptToMyFavorite}
                 handleFavoritePrompt = {handleFavoritePrompt}
+                deleteFavoritePrompt = {deleteFavoritePrompt}
+                IsFavoriteButton = {IsFavoriteButton}
               />)
         )
       }

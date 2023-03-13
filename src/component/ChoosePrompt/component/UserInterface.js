@@ -42,7 +42,7 @@ function a11yProps(index) {
 }
 
 
-function UserInterface({handleNext, setCopiedPromptFunc, isEnglish, setPromptToMyFavorite, FavoritePrompt, handleFavoritePrompt}){
+function UserInterface({handleNext, setCopiedPromptFunc, isEnglish, setPromptToMyFavorite, FavoritePrompt, IsFavoriteButton, deleteFavoritePrompt}){
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -70,11 +70,14 @@ function UserInterface({handleNext, setCopiedPromptFunc, isEnglish, setPromptToM
               setCopiedPromptFunc={setCopiedPromptFunc} 
               copyPromptToNextPhase={copyPromptToNextPhase}
               setPromptToMyFavorite={setPromptToMyFavorite}
+              deleteFavoritePrompt = {deleteFavoritePrompt}
+              IsFavoriteButton = {IsFavoriteButton}
+              FavoritePrompt ={FavoritePrompt}
             >
             </DisplayDefaultPrompt>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <YourFavorite copyPromptToNextPhase={copyPromptToNextPhase} FavoritePrompt={FavoritePrompt} handleFavoritePrompt={handleFavoritePrompt}/>
+          <YourFavorite copyPromptToNextPhase={copyPromptToNextPhase} FavoritePrompt={FavoritePrompt} deleteFavoritePrompt={deleteFavoritePrompt}/>
         </TabPanel>
         <TabPanel value={value} index={2}>
             <YourHistory copyPromptToNextPhase={copyPromptToNextPhase} setPromptToMyFavorite={setPromptToMyFavorite}/>

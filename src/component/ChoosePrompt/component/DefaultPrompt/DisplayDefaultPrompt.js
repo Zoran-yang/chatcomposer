@@ -1,5 +1,6 @@
-import { PromptInfo } from "./PromptInfo"
-import {ChinesePromptInfo} from "./ChinesePromptInfo"
+// import { PromptInfo } from "./PromptInfo"
+// import {ChinesePromptInfo} from "./ChinesePromptInfo"
+import {NewChinesePromptInfo, NewPromptInfo} from "./DataProcessingPrompt"
 import { useState } from "react"
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -12,7 +13,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import { Divider } from "@mui/material";
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+
 
 
 
@@ -55,67 +56,59 @@ function switchLanguage(status, english, chinese){
 }
 
  
-function DisplayDefaultPrompt({setPromptToMyFavorite,isEnglish,copyPromptToNextPhase}){
+function DisplayDefaultPrompt({isEnglish, copyPromptToNextPhase, IsFavoriteButton, FavoritePrompt}){
     const [value, setValue] = useState(0);
-    const language = switchLanguage(isEnglish, PromptInfo, ChinesePromptInfo)
+    const language = switchLanguage(isEnglish, NewPromptInfo, NewChinesePromptInfo);
+    const {PromptActivityType, PromptActivityTitle, PromptDetail} = language;
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
-
-    
-    function DisplayPromptDetail(){
-        return Object.values(language).reduce((arr,curr,index) =>{
-            arr.push(
-                <TabPanel key={index} value={value} index={index}>
-                    {Object.entries(curr).map((type) => {
-                        return(
-                            <Accordion key={type[0]}>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel1a-content"
-                                    id="panel1a-header"
-                                    key={type[0]}
-                                >
-                                    <Typography sx={{display: "flex",alignItems:"center"}}>{type[0]}</Typography>
-                                </AccordionSummary>
-                                <Divider />
-                                <AccordionDetails >
-                                    <div style={{display:"flex"}}>
-                                        <Typography>
-                                            {type[1]}
-                                        </Typography>
-                                        <Button>
-                                            <FavoriteBorderOutlinedIcon onClick={()=> setPromptToMyFavorite(type[1])}/>
-                                        </Button>
-                                    </div>
-
-                                    
-                                    <Button variant="outlined" size="small" onClick={() => copyPromptToNextPhase(type[1])}>
-                                            Choose and Next
-                                    </Button>
-                                </AccordionDetails>
-                            </Accordion>
-                        )
-                    })}
-                </TabPanel>
-            )
-            return arr      
-        },[])
-    }
-
-
-
-    return (
-        <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto" aria-label="scrollable auto tabs example">
-                    {Object.keys(language).map((type, index) =>{return <Tab label={type} key={type} {...a11yProps(index)} />})}
-                </Tabs>
+        return (
+            <Box sx={{ width: '100%' }}>
+                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto" aria-label="scrollable auto tabs example">
+                        {PromptActivityType.map((type, index) =>{return <Tab label={type} key={type} {...a11yProps(index)} />})}
+                    </Tabs>
+                </Box>                
+                {PromptActivityType.map((item, typeIndex)=>{
+                    
+                    return (
+                        <>
+                            <TabPanel key={typeIndex} value={value} index={typeIndex}>
+                            {PromptActivityTitle[typeIndex].map((title, titleIndex)=>{
+                                const promptDetailContent = PromptDetail[typeIndex][titleIndex]["PromptDetail"]
+                                return (
+                                    <Accordion key={title}>
+                                        <AccordionSummary
+                                            expandIcon={<ExpandMoreIcon />}
+                                            aria-controls="panel1a-content"
+                                            id="panel1a-header"
+                                            key={title}
+                                        >
+                                            <Typography sx={{display: "flex",alignItems:"center"}}>{title}</Typography>
+                                        </AccordionSummary>
+                                        <Divider />
+                                        <AccordionDetails >
+                                            <div style={{display:"flex"}}>
+                                                <Typography>
+                                                    {promptDetailContent}
+                                                </Typography>
+                                                <IsFavoriteButton isFavoriteState={PromptDetail[typeIndex][titleIndex]["IsFavorite"]} PromptInfo={promptDetailContent} PromptInfoindex={FavoritePrompt.indexOf(promptDetailContent)} />
+                                                <Button variant="outlined" size="small" onClick={() => copyPromptToNextPhase(promptDetailContent)}>
+                                                        Choose and Next
+                                                </Button> 
+                                            </div>    
+                                        </AccordionDetails>
+                                    </Accordion>
+                                )
+                            })}
+                            </TabPanel>
+                        </>
+                    )
+                })}
             </Box>
-            <DisplayPromptDetail></DisplayPromptDetail>      
-        </Box>
-      );
+        )
 }
 
 export {DisplayDefaultPrompt}

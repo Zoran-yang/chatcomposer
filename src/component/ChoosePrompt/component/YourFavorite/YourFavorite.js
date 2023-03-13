@@ -6,17 +6,8 @@ import { pink } from "@mui/material/colors";
 
 
 
-function YourFavorite({copyPromptToNextPhase, FavoritePrompt, handleFavoritePrompt}){
-    
-    function deleteFavoritePrompt(index){
-        if (index > -1) {
-            FavoritePrompt.splice(index, 1)
-            const revisedFavoritePrompt = [...FavoritePrompt];
-            handleFavoritePrompt(revisedFavoritePrompt)
-            localStorage.setItem('My Favorite prompt', JSON.stringify(revisedFavoritePrompt))
-        }
-    }
-    
+function YourFavorite({copyPromptToNextPhase, FavoritePrompt, deleteFavoritePrompt}){
+
     if (!FavoritePrompt.length){
         return(
             <Typography>
