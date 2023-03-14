@@ -42,7 +42,7 @@ function a11yProps(index) {
 }
 
 
-function UserInterface({handleNext, setCopiedPromptFunc, isEnglish, setPromptToMyFavorite, FavoritePrompt, IsFavoriteButton, deleteFavoritePrompt}){
+function UserInterface({handleNext, setCopiedPromptFunc, switchLanguage, isEnglish, setPromptToMyFavorite, FavoritePrompt, IsFavoriteButton, deleteFavoritePrompt, promptDetailAndState}){
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -65,14 +65,15 @@ function UserInterface({handleNext, setCopiedPromptFunc, isEnglish, setPromptToM
         </Box>
         <TabPanel value={value} index={0}>
             <DisplayDefaultPrompt 
-              isEnglish ={isEnglish} 
+              switchLanguage ={switchLanguage} 
+              isEnglish = {isEnglish}
               handleNext={handleNext} 
               setCopiedPromptFunc={setCopiedPromptFunc} 
               copyPromptToNextPhase={copyPromptToNextPhase}
               setPromptToMyFavorite={setPromptToMyFavorite}
               deleteFavoritePrompt = {deleteFavoritePrompt}
               IsFavoriteButton = {IsFavoriteButton}
-              FavoritePrompt ={FavoritePrompt}
+              promptDetailAndState = {promptDetailAndState}
             >
             </DisplayDefaultPrompt>
         </TabPanel>

@@ -34,7 +34,6 @@ function YourHistory({copyPromptToNextPhase, setPromptToMyFavorite}){
                                         <FavoriteBorderOutlinedIcon onClick={()=> setPromptToMyFavorite(prompt)}/>
                                     </Button>
                                 </div>                                
-
                                 <>
                                     <Button variant="outlined" size="small" onClick={() => copyPromptToNextPhase(prompt)}>
                                         Choose and Next

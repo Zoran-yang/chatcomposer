@@ -20,16 +20,16 @@ function YourFavorite({copyPromptToNextPhase, FavoritePrompt, deleteFavoriteProm
             <List sx={{maxHeight: 300, overflow:'auto'}}>
                 {FavoritePrompt.map((prompt, index) => {
                     return(
-                        <Fragment key={prompt}>
+                        <Fragment key={prompt["prompt"]}>
                             <ListItem component="div" sx={{display:"block"}}>
                                 <div style={{display:"flex"}}>
-                                    <ListItemText primary={prompt} />
+                                    <ListItemText primary={prompt["prompt"]} />
                                     <Button variant="outlined" size="small" color="error" onClick={() => deleteFavoritePrompt(index)}>
                                         <DeleteForeverOutlinedIcon sx={{ color: pink[500] }}/>
                                     </Button>
                                 </div>
                                 <>
-                                    <Button variant="outlined" size="small" onClick={() => copyPromptToNextPhase(prompt)}>
+                                    <Button variant="outlined" size="small" onClick={() => copyPromptToNextPhase(prompt["prompt"])}>
                                         Choose and Next
                                     </Button>                       
                                 </>

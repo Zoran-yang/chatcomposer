@@ -1,5 +1,4 @@
-// import { PromptInfo } from "./PromptInfo"
-// import {ChinesePromptInfo} from "./ChinesePromptInfo"
+
 import {NewChinesePromptInfo, NewPromptInfo} from "./DataProcessingPrompt"
 import { useState } from "react"
 import PropTypes from 'prop-types';
@@ -49,18 +48,15 @@ function a11yProps(index) {
     };
 }
 
-function switchLanguage(status, english, chinese){
-    if (status) return english
-    return chinese
-
-}
-
  
-function DisplayDefaultPrompt({isEnglish, copyPromptToNextPhase, IsFavoriteButton, FavoritePrompt}){
+function DisplayDefaultPrompt({switchLanguage, isEnglish, copyPromptToNextPhase, IsFavoriteButton, promptDetailAndState}){
     const [value, setValue] = useState(0);
     const language = switchLanguage(isEnglish, NewPromptInfo, NewChinesePromptInfo);
-    const {PromptActivityType, PromptActivityTitle, PromptDetail} = language;
-
+    const {PromptActivityType, PromptActivityTitle} = language;
+    // console.log(isEnglish)
+    // console.log(PromptActivityType)
+    // console.log(promptDetailAndState)
+    
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
@@ -72,37 +68,43 @@ function DisplayDefaultPrompt({isEnglish, copyPromptToNextPhase, IsFavoriteButto
                     </Tabs>
                 </Box>                
                 {PromptActivityType.map((item, typeIndex)=>{
-                    
                     return (
                         <>
                             <TabPanel key={typeIndex} value={value} index={typeIndex}>
-                            {PromptActivityTitle[typeIndex].map((title, titleIndex)=>{
-                                const promptDetailContent = PromptDetail[typeIndex][titleIndex]["PromptDetail"]
-                                return (
-                                    <Accordion key={title}>
-                                        <AccordionSummary
-                                            expandIcon={<ExpandMoreIcon />}
-                                            aria-controls="panel1a-content"
-                                            id="panel1a-header"
-                                            key={title}
-                                        >
-                                            <Typography sx={{display: "flex",alignItems:"center"}}>{title}</Typography>
-                                        </AccordionSummary>
-                                        <Divider />
-                                        <AccordionDetails >
-                                            <div style={{display:"flex"}}>
-                                                <Typography>
-                                                    {promptDetailContent}
-                                                </Typography>
-                                                <IsFavoriteButton isFavoriteState={PromptDetail[typeIndex][titleIndex]["IsFavorite"]} PromptInfo={promptDetailContent} PromptInfoindex={FavoritePrompt.indexOf(promptDetailContent)} />
-                                                <Button variant="outlined" size="small" onClick={() => copyPromptToNextPhase(promptDetailContent)}>
-                                                        Choose and Next
-                                                </Button> 
-                                            </div>    
-                                        </AccordionDetails>
-                                    </Accordion>
-                                )
-                            })}
+                                {PromptActivityTitle[typeIndex].map((title, titleIndex)=>{                                
+                                    const promptDetailContent = promptDetailAndState[typeIndex][titleIndex]["PromptDetail"]
+                                    return (
+                                        <Accordion key={title}>
+                                            <AccordionSummary
+                                                expandIcon={<ExpandMoreIcon />}
+                                                aria-controls="panel1a-content"
+                                                id="panel1a-header"
+                                                key={title}
+                                            >
+                                                <Typography sx={{display: "flex",alignItems:"center"}}>{title}</Typography>
+                                            </AccordionSummary>
+                                            <Divider />
+                                            <AccordionDetails >
+                                                <div style={{display:"flex"}}>
+                                                    <Typography>
+                                                        {promptDetailContent}
+                                                    </Typography>
+                                                    <IsFavoriteButton 
+                                                        isFavoriteState={promptDetailAndState[typeIndex][titleIndex]["IsFavorite"]} 
+                                                        typeIndex = {typeIndex}
+                                                        titleIndex = {titleIndex}
+                                                        source = "DisplayDefaultPrompt"
+                                                        PromptInfo = {promptDetailContent}
+                                                        favoritePromptPos = {promptDetailAndState[typeIndex][titleIndex]["favoritePromptPos"]} 
+                                                    />
+                                                    <Button variant="outlined" size="small" onClick={() => copyPromptToNextPhase(promptDetailContent)}>
+                                                            Choose and Next
+                                                    </Button> 
+                                                </div>    
+                                            </AccordionDetails>
+                                        </Accordion>
+                                    )
+                                })}
                             </TabPanel>
                         </>
                     )
