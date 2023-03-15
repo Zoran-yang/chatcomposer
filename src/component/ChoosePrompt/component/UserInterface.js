@@ -76,6 +76,9 @@ function UserInterface({handleNext, setCopiedPromptFunc, switchLanguage, isEngli
               promptDetailAndState = {promptDetailAndState}
             >
             </DisplayDefaultPrompt>
+            <div><span>Reference : <a href="https://www.explainthis.io/zh-hant/chatgpt">ChatGPT 指令大全</a></span></div>
+            <div><span>Come from : <a href="https://www.explainthis.io/zh-hant">ExplainThis</a>  Great website for frontend and backend info. Highly recommended resource for expanding development knowledge. </span></div>
+      
         </TabPanel>
         <TabPanel value={value} index={1}>
           <YourFavorite copyPromptToNextPhase={copyPromptToNextPhase} FavoritePrompt={FavoritePrompt} deleteFavoritePrompt={deleteFavoritePrompt}/>
