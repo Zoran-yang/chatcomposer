@@ -1,9 +1,9 @@
 
+
 export function deleteFavoritePrompt(FavoritePrompt, index, isEnglish, setFavoritePrompt, setPromptDetailAndState) {
     if (index > -1) {
         // Send state-changing info back to "DisplayDefaultPrompt"
-        let sourceOfPrompt = FavoritePrompt[index]["sourceInfo"]["source"]||""
-  
+        const sourceOfPrompt = FavoritePrompt[index].sourceInfo.source||""
         switch (sourceOfPrompt) {
           case  "DisplayDefaultPrompt" :  //At same time, this function will delete the info saved in corresponding prompt.  
             let {typeIndex, titleIndex} = FavoritePrompt[index]["sourceInfo"]

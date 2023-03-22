@@ -7,7 +7,6 @@ import { useState } from 'react';
 
 export function IsFavoriteButton({ isFavoriteState, PromptInfo, typeIndex, titleIndex, source, favoritePromptPos, setPromptToMyFavorite, deleteFavoritePrompt, FavoritePrompt, isEnglish, setFavoritePrompt, setPromptDetailAndState }){
     const [buttonState, setButtonState] = useState(isFavoriteState)
-
     function handleButtonState() {
       setButtonState(!buttonState)
     }

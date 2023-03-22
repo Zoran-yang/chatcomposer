@@ -32,5 +32,5 @@ export function setPromptToMyFavorite(FavoritePrompt, isEnglish, prompt, sourceI
         localStorage.setItem(isEnglish, JSON.stringify(updatedState));
         return updatedState;
       });
-    }
+    } 
 }

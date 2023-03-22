@@ -3,13 +3,14 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 import {submitPromptToOpenai} from"./submitPromptToOpenai"
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import {setPromptToMyFavorite} from "../../container/setPromptToMyFavorite";
+import {deleteFavoritePrompt} from "../../container/deleteFavoritePrompt";
+import { IsFavoriteButton } from "../ChoosePrompt/component/DefaultPrompt/IsFavoriteButton";
 
 
 
 
-function PreviewAndAdjustPrompt({copiedPrompt, handleNext, handleBack, activeStep, TabName}){
+function PreviewAndAdjustPrompt({copiedPrompt, handleNext, handleBack, activeStep, TabName, FavoritePrompt, isEnglish, setFavoritePrompt, setPromptDetailAndState}){
     const [revisedPromt, setRevisedPromt] = useState(copiedPrompt)
     function handleRevisedPromt(e){
         setRevisedPromt(e.target.value)
@@ -54,12 +55,22 @@ function PreviewAndAdjustPrompt({copiedPrompt, handleNext, handleBack, activeSte
                             justifyContent:"flex-end",
                             flexWrap: "wrap"
                     }}>
-                        <Button>
-                            <FavoriteBorderOutlinedIcon onClick={()=> setPromptToMyFavorite(revisedPromt)}/>
-                        </Button>                        
-                        <Button variant="outlined" size="small" onClick={()=>{
-                            submitAndSavePrompt()
-                        }}>
+
+                        <IsFavoriteButton 
+                            isFavoriteState={false} 
+                            typeIndex = {undefined}
+                            titleIndex = {undefined}
+                            source = "PreviewAndAdjustPrompt"
+                            PromptInfo = {revisedPromt}
+                            favoritePromptPos = {FavoritePrompt.length-1}
+                            setPromptToMyFavorite = {setPromptToMyFavorite}
+                            deleteFavoritePrompt = {deleteFavoritePrompt}
+                            FavoritePrompt = {FavoritePrompt}
+                            isEnglish = {isEnglish}
+                            setFavoritePrompt = {setFavoritePrompt}
+                            setPromptDetailAndState = {setPromptDetailAndState}
+                        />
+                        <Button variant="outlined" size="small" onClick={()=>submitAndSavePrompt()}>
                             Sumbit
                         </Button>
                         <Button variant="outlined" size="small" onClick={handleBack}>
