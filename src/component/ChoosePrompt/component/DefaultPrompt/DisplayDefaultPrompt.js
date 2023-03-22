@@ -12,6 +12,9 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import { Divider } from "@mui/material";
+import { IsFavoriteButton } from "./IsFavoriteButton";
+import {deleteFavoritePrompt} from '../../../../container/deleteFavoritePrompt';
+import {setPromptToMyFavorite} from '../../../../container/setPromptToMyFavorite';
 
 
 
@@ -49,13 +52,10 @@ function a11yProps(index) {
 }
 
  
-function DisplayDefaultPrompt({switchLanguage, isEnglish, copyPromptToNextPhase, IsFavoriteButton, promptDetailAndState}){
+function DisplayDefaultPrompt({switchLanguage, isEnglish, copyPromptToNextPhase, promptDetailAndState, FavoritePrompt, setFavoritePrompt, setPromptDetailAndState}){
     const [value, setValue] = useState(0);
     const language = switchLanguage(isEnglish, NewPromptInfo, NewChinesePromptInfo);
     const {PromptActivityType, PromptActivityTitle} = language;
-    // console.log(isEnglish)
-    // console.log(PromptActivityType)
-    // console.log(promptDetailAndState)
     
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -95,7 +95,13 @@ function DisplayDefaultPrompt({switchLanguage, isEnglish, copyPromptToNextPhase,
                                                         titleIndex = {titleIndex}
                                                         source = "DisplayDefaultPrompt"
                                                         PromptInfo = {promptDetailContent}
-                                                        favoritePromptPos = {promptDetailAndState[typeIndex][titleIndex]["favoritePromptPos"]} 
+                                                        favoritePromptPos = {promptDetailAndState[typeIndex][titleIndex]["favoritePromptPos"]}
+                                                        setPromptToMyFavorite = {setPromptToMyFavorite}
+                                                        deleteFavoritePrompt = {deleteFavoritePrompt}
+                                                        FavoritePrompt = {FavoritePrompt}
+                                                        isEnglish = {isEnglish}
+                                                        setFavoritePrompt = {setFavoritePrompt}
+                                                        setPromptDetailAndState = {setPromptDetailAndState}
                                                     />
                                                     <Button variant="outlined" size="small" onClick={() => copyPromptToNextPhase(promptDetailContent)}>
                                                             Choose and Next

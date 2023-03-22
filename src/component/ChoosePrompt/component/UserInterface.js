@@ -42,7 +42,7 @@ function a11yProps(index) {
 }
 
 
-function UserInterface({handleNext, setCopiedPromptFunc, switchLanguage, isEnglish, setPromptToMyFavorite, FavoritePrompt, IsFavoriteButton, deleteFavoritePrompt, promptDetailAndState}){
+function UserInterface({handleNext, handleCopiedPrompt, switchLanguage, isEnglish, FavoritePrompt, promptDetailAndState, setFavoritePrompt, setPromptDetailAndState}){
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -50,7 +50,7 @@ function UserInterface({handleNext, setCopiedPromptFunc, switchLanguage, isEngli
   };
 
   function copyPromptToNextPhase(CopiedPrompt){
-    setCopiedPromptFunc(CopiedPrompt)
+    handleCopiedPrompt(CopiedPrompt)
     handleNext()
   }
 
@@ -65,15 +65,16 @@ function UserInterface({handleNext, setCopiedPromptFunc, switchLanguage, isEngli
         </Box>
         <TabPanel value={value} index={0}>
             <DisplayDefaultPrompt 
-              switchLanguage ={switchLanguage} 
+              // control the language
+              switchLanguage = {switchLanguage} 
               isEnglish = {isEnglish}
-              handleNext={handleNext} 
-              setCopiedPromptFunc={setCopiedPromptFunc} 
-              copyPromptToNextPhase={copyPromptToNextPhase}
-              setPromptToMyFavorite={setPromptToMyFavorite}
-              deleteFavoritePrompt = {deleteFavoritePrompt}
-              IsFavoriteButton = {IsFavoriteButton}
+              // set favorite prompt
               promptDetailAndState = {promptDetailAndState}
+              FavoritePrompt={FavoritePrompt}
+              setFavoritePrompt={setFavoritePrompt}
+              setPromptDetailAndState={setPromptDetailAndState}
+              // copy prompt to next phase
+              copyPromptToNextPhase = {copyPromptToNextPhase}
             >
             </DisplayDefaultPrompt>
             <div><span>Reference : <a href="https://www.explainthis.io/zh-hant/chatgpt">ChatGPT 指令大全</a></span></div>
@@ -81,10 +82,16 @@ function UserInterface({handleNext, setCopiedPromptFunc, switchLanguage, isEngli
       
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <YourFavorite copyPromptToNextPhase={copyPromptToNextPhase} FavoritePrompt={FavoritePrompt} deleteFavoritePrompt={deleteFavoritePrompt}/>
+          <YourFavorite 
+            copyPromptToNextPhase={copyPromptToNextPhase} 
+            FavoritePrompt={FavoritePrompt}
+            isEnglish={isEnglish}
+            setFavoritePrompt={setFavoritePrompt}
+            setPromptDetailAndState={setPromptDetailAndState}
+          />
         </TabPanel>
         <TabPanel value={value} index={2}>
-            <YourHistory copyPromptToNextPhase={copyPromptToNextPhase} setPromptToMyFavorite={setPromptToMyFavorite}/>
+            <YourHistory copyPromptToNextPhase={copyPromptToNextPhase}/>
         </TabPanel>
     </Box>
   )
