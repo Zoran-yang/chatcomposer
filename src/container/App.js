@@ -12,6 +12,12 @@ import { NewChinesePromptInfo, NewPromptInfo } from "../component/ChoosePrompt/c
 // localStorage.setItem('chinesePromptFavorite',  "[]")
 // localStorage.setItem("englishPromptFavorite",  "[]")
 
+const oldFavoritePrompt = JSON.parse(localStorage.getItem('My Favorite prompt')||"[]");
+if (oldFavoritePrompt.length) {
+  localStorage.setItem('englishPromptFavorite', JSON.stringify(oldFavoritePrompt));
+  localStorage.removeItem('My Favorite prompt');
+}
+
 
 function App() {
 
@@ -36,8 +42,7 @@ function App() {
 
   
   function switchLanguage(status, english, chinese){
-    if (status === "englishPrompt") return english
-    return chinese
+    return status === "englishPrompt"? english : chinese
   }
 
   function getLocalPromptDetailAndState(language) {

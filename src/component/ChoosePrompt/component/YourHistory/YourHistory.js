@@ -30,9 +30,9 @@ function YourHistory({copyPromptToNextPhase, setPromptToMyFavorite}){
                             <ListItem component="div" sx={{display:"block"}}>
                                 <div style={{display:"flex"}}>
                                     <ListItemText primary={prompt} />
-                                    <Button>
+                                    {/* <Button>
                                         <FavoriteBorderOutlinedIcon onClick={()=> setPromptToMyFavorite(prompt)}/>
-                                    </Button>
+                                    </Button> */}
                                 </div>                                
                                 <>
                                     <Button variant="outlined" size="small" onClick={() => copyPromptToNextPhase(prompt)}>
