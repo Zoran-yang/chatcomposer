@@ -1,59 +1,70 @@
-
-import './App.css';
-import { useState } from 'react';
-import { Box, Stepper, Step, StepLabel, Typography } from '@mui/material';
-import { ChoosePrompt } from "../component/ChoosePrompt/ChoosePrompt"
-import { PreviewAndAdjustPrompt } from "../component/PreviewAndAdjustPrompt/PreviewAndAdjustPrompt"
-import { NewChinesePromptInfo, NewPromptInfo } from "../component/ChoosePrompt/component/DefaultPrompt/DataProcessingPrompt"
-
+import "./App.css";
+import { useState } from "react";
+import { Box, Stepper, Step, StepLabel, Typography } from "@mui/material";
+import { ChoosePrompt } from "../component/ChoosePrompt/ChoosePrompt";
+import { PreviewAndAdjustPrompt } from "../component/PreviewAndAdjustPrompt/PreviewAndAdjustPrompt";
+import {
+  NewChinesePromptInfo,
+  NewPromptInfo,
+} from "../component/ChoosePrompt/component/DefaultPrompt/DataProcessingPrompt";
 
 // localStorage.setItem("englishPrompt", "[]")
 // localStorage.setItem("chinesePrompt", "[]")
 // localStorage.setItem('chinesePromptFavorite',  "[]")
 // localStorage.setItem("englishPromptFavorite",  "[]")
 
-const oldFavoritePrompt = JSON.parse(localStorage.getItem('My Favorite prompt')||"[]");
+const oldFavoritePrompt = JSON.parse(
+  localStorage.getItem("My Favorite prompt") || "[]"
+);
 if (oldFavoritePrompt.length) {
-  localStorage.setItem('englishPromptFavorite', JSON.stringify(oldFavoritePrompt));
-  localStorage.removeItem('My Favorite prompt');
+  localStorage.setItem(
+    "englishPromptFavorite",
+    JSON.stringify(oldFavoritePrompt)
+  );
+  localStorage.removeItem("My Favorite prompt");
 }
 
-
 function App() {
-
-  const steps = ['Choose your prompt', 'Preview and adjust your prompt'];
+  const steps = ["Choose your prompt", "Preview and adjust your prompt"];
   const [isEnglish, setIsEnglish] = useState("englishPrompt");
   const localPromptDetailAndState = getLocalPromptDetailAndState(isEnglish);
-  const [promptDetailAndState, setPromptDetailAndState] = useState(localPromptDetailAndState)
-  const localFavoritePrompt = JSON.parse(localStorage.getItem(isEnglish +'Favorite')||"[]");
-  const [copiedPrompt, setCopiedPrompt] = useState("")  //set textfield of PreviewAndAdjustPrompt
-  const [FavoritePrompt, setFavoritePrompt] = useState(localFavoritePrompt)
+  const [promptDetailAndState, setPromptDetailAndState] = useState(
+    localPromptDetailAndState
+  );
+  const localFavoritePrompt = JSON.parse(
+    localStorage.getItem(isEnglish + "Favorite") || "[]"
+  );
+  const [copiedPrompt, setCopiedPrompt] = useState(""); //set textfield of PreviewAndAdjustPrompt
+  const [FavoritePrompt, setFavoritePrompt] = useState(localFavoritePrompt);
 
-  const handleCopiedPrompt = (CopiedPrompt) =>{
-    setCopiedPrompt(CopiedPrompt)
-  }
-
-  const handleIsEnglish = (event) => {
-    const newLanguage = isEnglish === "englishPrompt" ? "chinesePrompt" : "englishPrompt";
-    setIsEnglish(newLanguage);
-    setPromptDetailAndState(getLocalPromptDetailAndState(newLanguage));
-    setFavoritePrompt(JSON.parse(localStorage.getItem(newLanguage + 'Favorite') || "[]"));
+  const handleCopiedPrompt = (CopiedPrompt) => {
+    setCopiedPrompt(CopiedPrompt);
   };
 
-  
-  function switchLanguage(status, english, chinese){
-    return status === "englishPrompt"? english : chinese
+  const handleIsEnglish = (event) => {
+    const newLanguage =
+      isEnglish === "englishPrompt" ? "chinesePrompt" : "englishPrompt";
+    setIsEnglish(newLanguage);
+    setPromptDetailAndState(getLocalPromptDetailAndState(newLanguage));
+    setFavoritePrompt(
+      JSON.parse(localStorage.getItem(newLanguage + "Favorite") || "[]")
+    );
+  };
+
+  function switchLanguage(status, english, chinese) {
+    return status === "englishPrompt" ? english : chinese;
   }
 
   function getLocalPromptDetailAndState(language) {
     let localData = JSON.parse(localStorage.getItem(language) || "[]");
     if (!localData.length) {
-      localData = language === "englishPrompt" ? NewPromptInfo["PromptDetail"] : NewChinesePromptInfo["PromptDetail"];
+      localData =
+        language === "englishPrompt"
+          ? NewPromptInfo["PromptDetail"]
+          : NewChinesePromptInfo["PromptDetail"];
     }
     return localData;
   }
-
-
 
   // control the movement of the stepper
   const [activeStep, setActiveStep] = useState(0);
@@ -100,14 +111,10 @@ function App() {
   //   setActiveStep(0);
   // };
 
-
-
   //-----------------------------------------------------------------------------------------------------
-  
-
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: "100%" }}>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
@@ -132,45 +139,44 @@ function App() {
           <Typography sx={{ mt: 2, mb: 1 }}>
             All steps completed - you&apos;re finished
           </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             {/* <Box sx={{ flex: '1 1 auto' }} />
             <Button onClick={handleReset}>Reset</Button> */}
           </Box>
         </>
-      ) : 
-        (activeStep === 1 ? 
-          (<PreviewAndAdjustPrompt 
-              // set choosed prompt to preview 
-              copiedPrompt={copiedPrompt} 
-              // control the movement of the stepper
-              activeStep ={activeStep} 
-              handleNext={handleNext} 
-              handleBack={handleBack} 
-              TabName = {steps[activeStep]}
-              // set favorite prompt
-              FavoritePrompt = {FavoritePrompt}
-              isEnglish = {isEnglish}
-              setFavoritePrompt = {setFavoritePrompt}
-              setPromptDetailAndState = {setPromptDetailAndState}
-            />) 
-          : (<ChoosePrompt 
-                // control the movement of the stepper
-                activeStep ={activeStep} 
-                handleNext={handleNext} 
-                TabName = {steps[activeStep]}
-                // control the language
-                isEnglish = {isEnglish}
-                handleCopiedPrompt={handleCopiedPrompt} 
-                handleIsEnglish={handleIsEnglish} 
-                switchLanguage ={switchLanguage} 
-                // set favorite prompt
-                FavoritePrompt = {FavoritePrompt}
-                promptDetailAndState = {promptDetailAndState}
-                setFavoritePrompt = {setFavoritePrompt}
-                setPromptDetailAndState = {setPromptDetailAndState}
-              />)
-        )
-      }
+      ) : activeStep === 1 ? (
+        <PreviewAndAdjustPrompt
+          // set choosed prompt to preview
+          copiedPrompt={copiedPrompt}
+          // control the movement of the stepper
+          activeStep={activeStep}
+          handleNext={handleNext}
+          handleBack={handleBack}
+          TabName={steps[activeStep]}
+          // set favorite prompt
+          FavoritePrompt={FavoritePrompt}
+          isEnglish={isEnglish}
+          setFavoritePrompt={setFavoritePrompt}
+          setPromptDetailAndState={setPromptDetailAndState}
+        />
+      ) : (
+        <ChoosePrompt
+          // control the movement of the stepper
+          activeStep={activeStep}
+          handleNext={handleNext}
+          TabName={steps[activeStep]}
+          // control the language
+          isEnglish={isEnglish}
+          handleCopiedPrompt={handleCopiedPrompt}
+          handleIsEnglish={handleIsEnglish}
+          switchLanguage={switchLanguage}
+          // set favorite prompt
+          FavoritePrompt={FavoritePrompt}
+          promptDetailAndState={promptDetailAndState}
+          setFavoritePrompt={setFavoritePrompt}
+          setPromptDetailAndState={setPromptDetailAndState}
+        />
+      )}
     </Box>
   );
 }
