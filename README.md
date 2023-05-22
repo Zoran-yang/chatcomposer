@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# ChatGPT Plus
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How is ChatGPT Plus
 
-## Available Scripts
+Paste powerful prompt in chatGPT with easy step
+Introducing our latest innovation - the prompt extension for chatGPT. With this extension, users can receive powerful prompts and improve their writing skills by revising and refining their responses.
 
-In the project directory, you can run:
+With this extension, you can unleash your creativity and express yourself more effectively than ever before. Its personalized prompts and adaptive learning capabilities ensure that you get the most out of your writing experience.
 
-### `npm start`
+So why wait? Download the prompt extension for chatGPT today and start improving your writing skills in a matter of minutes. With its powerful features and intuitive design, it's the ultimate writing assistant for anyone who wants to succeed in today's fast-paced digital world.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+⚡️ Build your personal prompt\
+⚡️ User-friendly and convenient prompt template\
+⚡️ Friendly UI\
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## How To Use 🔧
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+From your command line, first clone this repo:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+# Clone the repository
+$ git clone https://github.com/Zoran-yang/SOPPlus.git
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Move into the repository
+$ cd chatcomposer
 
-### `npm run eject`
+# Remove the current origin repository
+$ git remote remove origin
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+After that, you can install the dependencies either using NPM or Yarn.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Using NPM: Simply run the below commands.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+# Install dependencies
+$ npm install
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# Build the software package
+$ npm run package
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
