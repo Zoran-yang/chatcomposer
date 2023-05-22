@@ -40,7 +40,7 @@ Using NPM: Simply run the below commands.
 # Install dependencies
 $ npm install
 
-# Build the software package
-$ npm run package
+# see the result
+$ npm run 
 
 ```
